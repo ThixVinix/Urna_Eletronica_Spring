@@ -9,5 +9,4 @@ public class UrnaEletronicaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UrnaEletronicaApplication.class, args);
 	}
-
-}
+}                       
