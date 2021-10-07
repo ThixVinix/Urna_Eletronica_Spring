@@ -10,12 +10,22 @@ public class Candidato {
 	public Candidato() {
 
 	}
+	
+	
 
-	public Candidato(String nome, Integer numero, String urlImagem) {
-		this.nome = nome;
-		this.numero = numero;
-		this.urlImagem = urlImagem;
+	public Candidato( String nome, Integer numero, String urlImagem) {
+		super();
+		this.setNome(nome);
+		this.setNumero(numero);
+		this.setUrlImagem(urlImagem);
 	}
+
+
+
+	public Long getId() {
+		return id;
+	}
+
 
 	public String getNome() {
 		return nome;
@@ -41,8 +51,11 @@ public class Candidato {
 		this.urlImagem = urlImagem;
 	}
 
-	public Long getId() {
-		return id;
-	}
+	
+
+	
+
+
+	
 
 }
