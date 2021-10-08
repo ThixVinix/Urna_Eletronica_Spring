@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import br.com.proway.turmab.grupo5.urnaEletronica.dto.ApuracaoDTO;
 import br.com.proway.turmab.grupo5.urnaEletronica.form.VotoForm;
+import br.com.proway.turmab.grupo5.urnaEletronica.model.Candidato;
 import br.com.proway.turmab.grupo5.urnaEletronica.model.Voto;
 import br.com.proway.turmab.grupo5.urnaEletronica.util.Constante;
 
@@ -40,6 +42,43 @@ public class VotoController {
 		preencherCorpoRespostaPadrao(resposta, HttpStatus.OK);
 		resposta.put("tipoVotacao", "naoanonimo");
 		return ResponseEntity.ok(resposta);
+	}
+
+	@GetMapping("/apuracao")
+	public ResponseEntity<ObjectNode> exibirRelatorioUrna() {
+		ObjectNode resposta = mapper.createObjectNode();
+//		Candidato juan = new Candidato("juan", 13, "url1");
+		
+		List<Candidato> candidatos = new ArrayList<Candidato>();
+		//candidatos.add(juan);
+		List<ApuracaoDTO> apuracaoDTO = new ArrayList<ApuracaoDTO>();	
+		for (Candidato candidato : candidatos) {
+			ApuracaoDTO dto = new ApuracaoDTO(candidato);
+			apuracaoDTO.add(dto);
+		}
+		
+//		Voto votodb = new Voto(null, null, 13);
+
+		List<Voto> votos = new ArrayList<Voto>();
+//		votos.add(votodb);
+//		votos.add(votodb);
+//		votos.add(votodb);
+		
+		
+		for (Voto voto : votos) {
+			for (ApuracaoDTO apuracao :apuracaoDTO) {
+				if (apuracao.getNumero() == voto.getNumero()) {	
+					apuracao.setVotos(apuracao.getVotos()+1);
+					break;
+				}
+			}
+			
+		}
+		preencherCorpoRespostaPadrao(resposta,HttpStatus.OK);
+		resposta.putPOJO("apuracao",apuracaoDTO);
+		
+		return ResponseEntity.ok(resposta);
+
 	}
 
 	@GetMapping("/votoIndefinido")
@@ -137,5 +176,8 @@ public class VotoController {
 		}
 		return listaErros;
 	}
+	
+	
 
+	
 }
