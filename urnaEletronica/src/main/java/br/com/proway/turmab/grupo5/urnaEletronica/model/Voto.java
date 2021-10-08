@@ -9,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "votos")
@@ -30,7 +28,6 @@ public class Voto {
 	private Integer numero;
 
 	@Basic
-	@Temporal(TemporalType.DATE)
 	private LocalDate data;
 
 	public Voto() {

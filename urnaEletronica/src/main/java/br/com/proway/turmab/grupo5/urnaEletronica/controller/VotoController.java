@@ -26,6 +26,8 @@ import br.com.proway.turmab.grupo5.urnaEletronica.dto.ApuracaoDTO;
 import br.com.proway.turmab.grupo5.urnaEletronica.form.VotoForm;
 import br.com.proway.turmab.grupo5.urnaEletronica.model.Candidato;
 import br.com.proway.turmab.grupo5.urnaEletronica.model.Voto;
+import br.com.proway.turmab.grupo5.urnaEletronica.repository.CandidatoRepository;
+import br.com.proway.turmab.grupo5.urnaEletronica.repository.VotoRepository;
 import br.com.proway.turmab.grupo5.urnaEletronica.util.Constante;
 
 @RestController
@@ -35,6 +37,10 @@ public class VotoController {
 
 	@Autowired
 	private ObjectMapper mapper;
+	@Autowired
+	private VotoRepository votoRepository;
+	@Autowired
+	private CandidatoRepository candidatoRepository;
 
 	@GetMapping("/tipoDeVotacao")
 	public ResponseEntity<ObjectNode> buscarTipoVotacao() {
@@ -47,24 +53,17 @@ public class VotoController {
 	@GetMapping("/apuracao")
 	public ResponseEntity<ObjectNode> exibirRelatorioUrna() {
 		ObjectNode resposta = mapper.createObjectNode();
-//		Candidato juan = new Candidato("juan", 13, "url1");
 		
-		List<Candidato> candidatos = new ArrayList<Candidato>();
-		//candidatos.add(juan);
+		List<Candidato> candidatos = candidatoRepository.findAll();
+	
 		List<ApuracaoDTO> apuracaoDTO = new ArrayList<ApuracaoDTO>();	
 		for (Candidato candidato : candidatos) {
 			ApuracaoDTO dto = new ApuracaoDTO(candidato);
 			apuracaoDTO.add(dto);
 		}
 		
-//		Voto votodb = new Voto(null, null, 13);
+		List<Voto> votos = votoRepository.findAll();
 
-		List<Voto> votos = new ArrayList<Voto>();
-//		votos.add(votodb);
-//		votos.add(votodb);
-//		votos.add(votodb);
-		
-		
 		for (Voto voto : votos) {
 			for (ApuracaoDTO apuracao :apuracaoDTO) {
 				if (apuracao.getNumero() == voto.getNumero()) {	
@@ -112,6 +111,7 @@ public class VotoController {
 		}
 
 		Voto voto = votoForm.converter();
+		votoRepository.save(voto);
 
 		preencherCorpoRespostaPadrao(resposta, HttpStatus.OK, "Voto registrado com sucesso!");
 

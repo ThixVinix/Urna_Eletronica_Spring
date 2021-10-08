@@ -1,0 +1,6 @@
+INSERT INTO CANDIDATOS (NOME,NUMERO,URL_IMAGEM) VALUES ('TULÍO',12,'http://localhost:8080/static/imgs/candidatos/candidato_1.jpg')
+INSERT INTO CANDIDATOS (NOME,NUMERO,URL_IMAGEM) VALUES ('MARIA',13,'http://localhost:8080/static/imgs//candidatos/candidato_2.jpg')
+INSERT INTO CANDIDATOS (NOME,NUMERO,URL_IMAGEM) VALUES ('CECÍLIA',17,'http://localhost:8080/static/imgs/candidatos/candidato_3.jpg')
+INSERT INTO CANDIDATOS (NOME,NUMERO,URL_IMAGEM) VALUES ('JOÃO',15,'http://localhost:8080/static/imgs/candidatos/candidato_4.png')
+INSERT INTO CANDIDATOS (NOME,NUMERO,URL_IMAGEM) VALUES ('MAURO',16,'http://localhost:8080/static/imgs/candidatos/candidato_5.png')
+INSERT INTO CANDIDATOS (NOME,NUMERO,URL_IMAGEM) VALUES ('JOSÉ',14,'http://localhost:8080/static/imgs/candidatos/candidato_6.jpg')
