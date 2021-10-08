@@ -1,10 +1,22 @@
 package br.com.proway.turmab.grupo5.urnaEletronica.model;
 
-public class Usuario {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "usuario")
+public class Usuario {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	/** Login -> email */
+	@Column(name = "login", columnDefinition = "VARCHAR", unique = true, updatable = false, nullable = false)
 	private String login;
+	@Column(name = "password", columnDefinition = "VARCHAR", unique = true, updatable = true, nullable = false)
 	private String password;
 
 	public Usuario() {
