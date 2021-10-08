@@ -2,11 +2,35 @@ package br.com.proway.turmab.grupo5.urnaEletronica.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
+@Table(name = "votos")
 public class Voto {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@Column(name = "rg", columnDefinition = "VARCHAR", unique = true, updatable = false, nullable = true)
 	private String rg;
+
+	@Column(name = "nome", columnDefinition = "VARCHAR", unique = false, updatable = false, nullable = false)
 	private String nome;
+
+	@Column(name = "numero", columnDefinition = "SMALLINT", unique = false, updatable = false, nullable = false)
 	private Integer numero;
+
+	@Basic
+	@Temporal(TemporalType.DATE)
 	private LocalDate data;
 
 	public Voto() {
